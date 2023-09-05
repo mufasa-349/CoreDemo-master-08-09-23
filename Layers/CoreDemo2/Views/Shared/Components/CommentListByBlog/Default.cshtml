@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<EntityLayer.Concrete.Comment>
+
+
+@foreach(var item in Model)
+{
+	<div class="comments-top-top">
+		<div class="top-comment-left">
+			<a href="#"><img class="img-responsive" src="~/quickly-web/web/images/5.jpg" alt=""></a>
+		</div>
+		<div class="top-comment-right">
+			<ul>
+				<li><span class="left-at"><a href="#">@item.CommentUserName</a></span></li>
+				<li><span class="right-at">@item.CommentDate</span></li>
+				<li><a class="reply" href="#">REPLY</a></li>
+			</ul>
+			<p>@item.CommentContent </p>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+    
+}
+
+
+
+<h1>CommentsTestViewComponent</h1>
+

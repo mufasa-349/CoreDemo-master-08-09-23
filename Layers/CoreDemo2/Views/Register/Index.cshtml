@@ -1,0 +1,64 @@
+﻿@model EntityLayer.Concrete.Writer
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div class="sign-up-form">
+	<h3>Register Here</h3>
+	<p>
+		Having hands on experience in creating innovative designs,I do offer design
+		solutions which harness
+	</p>
+	<div class="sign-up">
+		<h5>Personal Information</h5>
+		 @using (Html.BeginForm("Index", "Register", FormMethod.Post)){
+			<div class="sign-u">
+				<div class="sign-up1">
+					<h4 class="a">First Name* :</h4>
+				</div>
+				<div class="sign-up2">
+					@Html.TextBoxFor(x=>x.WriterName)
+					@Html.ValidationMessageFor(x=>x.WriterName)
+					@* <input type="text" placeholder="FirstName" name="WriterName" /> *@
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="sign-u">
+				<div class="sign-up1">
+					<h4 class="c">Email Address* :</h4>
+				</div>
+				<div class="sign-up2">
+					<input type="email" placeholder="E-Mail" name="WriterMail" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="sign-u">
+				<div class="sign-up1">
+					<h4 class="d">Password* :</h4>
+				</div>
+				<div class="sign-up2">
+					<input type="password" placeholder=" " required=" " name="WriterPassword" />
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="sign-u">
+				<div class="sign-up1">
+					<h4>Confirm Password* :</h4>
+				</div>
+				<div class="sign-up2">
+
+					<input type="text" name="WriterImage" />
+
+				</div>
+				<div class="clearfix"> </div>
+				<input type="submit" value="Submit">
+			</div>
+			
+		}
+		
+		
+	</div>
+</div>
