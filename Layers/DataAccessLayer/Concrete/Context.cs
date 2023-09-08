@@ -12,9 +12,12 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-JH0VPAC\\SQLEXPRESS; database=CoreBlogDb; integrated security=true;");
+            optionsBuilder.UseSqlServer("server=localhost,1433; database=CoreBlogDb;User Id=sa;Password=Dogum2003; integrated security=false;");
         }
+        
 
+        //DESKTOP-JH0VPAC\\SQLEXPRESS
+        //"server=localhost; database=CoreBlogDb; integrated security=true;"
         public DbSet<About> Abouts { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }

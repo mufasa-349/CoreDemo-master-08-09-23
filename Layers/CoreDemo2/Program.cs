@@ -7,23 +7,32 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddMvc();
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-	.AddCookie(options =>
-	{
-		options.LoginPath = "/Login/Index";
-	});
-
 builder.Services.AddSession();
 
 builder.Services.AddControllers(config =>
 {
-	var policy = new AuthorizationPolicyBuilder()
-					 .RequireAuthenticatedUser()
-					 .Build();
-	config.Filters.Add(new AuthorizeFilter(policy));
+    var policy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                     .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
 });
+
+builder.Services.AddMvc();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    x =>
+    {
+        x.LoginPath = "/Login/Index";
+    }
+    );
+
+builder.Services.ConfigureApplicationCookie(
+    options =>
+    {
+        options.LoginPath = new PathString("/Login/Index");
+    }
+
+);
+
 
 var app = builder.Build();
 
@@ -35,8 +44,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseStatusCodePagesWithReExecute(
-	"/AccessDenied/Index");
+//app.UseStatusCodePagesWithReExecute(
+//	"/AccessDenied/Index");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -44,12 +53,13 @@ app.UseStaticFiles();
 app.UseSession();
 
 app.UseRouting();
-
+ 
 app.UseAuthorization();
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
+
 
 app.Run();

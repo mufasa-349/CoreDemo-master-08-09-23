@@ -4,13 +4,17 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreDemo2.Controllers
 {
-	public class RegisterController : Controller
+	[AllowAnonymous]
+    
+    public class RegisterController : Controller
 	{
-		WriterManager wm = new WriterManager(new EfWriterRepository());
+
+        WriterManager wm = new WriterManager(new EfWriterRepository());
 
 		[HttpGet]
 		public IActionResult Index()
